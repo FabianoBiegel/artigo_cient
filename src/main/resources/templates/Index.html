@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width" />
+<title>Trabalho</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+rel="stylesheet"/>
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+rel="stylesheet"/>
+</head>
+<body>
+<h1>Página Inicial</h1>
+
+<a HREF="http://localhost:8080/index" TARGET="_blank" > Página Inicial</a> 
+<br><a HREF="http://localhost:8080/eventos" TARGET="_blank" > Eventos</a>   
+<br><a HREF="http://localhost:8080/evento/userId" TARGET="_blank" > Eventos do usuário</a>   
+<br><a HREF="http://localhost:8080/evento/userId/delete" TARGET="_blank" > Apagar Eventos do Usuário</a>   
+<br><a HREF="http://localhost:8080/usuario/cadastro" TARGET="_blank" > Cadastro de Usuários</a>   
+<br><a HREF="http://localhost:8080/submissoes" TARGET="_blank" > Artigos</a>   
+<br><a HREF="http://localhost:8080/submissoes/userId" TARGET="_blank" > Artigos do Usuário</a>   
+<br><a HREF="http://localhost:8080/submissoes/userId/delete" TARGET="_blank" > apagar artigos</a> 
+<br><a HREF="http://localhost:8080/submissoes/evento/idEvento" TARGET="_blank" > Evento específico </a>   
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
