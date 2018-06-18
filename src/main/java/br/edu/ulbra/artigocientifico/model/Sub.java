@@ -69,11 +69,11 @@ public class Sub{
 	public void setSubArq(String subArq) {
 		this.SubArq = subArq;
 	}
-        public Set<Evento> getAvaliacoes() {
+        public Set<Evento> getEventos() {
 		return eventos;
 	}
 
-	public void setAvaliacoes(Set<Evento> eventos) {
+	public void setEventos(Set<Evento> eventos) {
 		this.eventos = eventos;
 	}
 

@@ -2,8 +2,7 @@ package br.edu.ulbra.artigocientifico.controller;
 
 import br.edu.ulbra.artigocientifico.config.StringConstants;
 import br.edu.ulbra.artigocientifico.model.Role;
-import br.edu.ulbra.artigocientifico.model.Vinho;
-import br.edu.ulbra.artigocientifico.repository.VinhoRepository;
+import br.edu.ulbra.artigocientifico.model.Sub;
 import br.edu.ulbra.artigocientifico.service.interfaces.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.nio.file.Paths;
 import java.util.List;
+import br.edu.ulbra.artigocientifico.repository.SubRepository;
 
 @Controller
 public class IndexController {
@@ -25,7 +25,7 @@ public class IndexController {
 	@Autowired
 	SecurityService securityService;
 	@Autowired
-	VinhoRepository vinhoRepository;
+	SubRepository subRepository;
 
 	@RequestMapping("/")
 	public String index(){
@@ -49,8 +49,8 @@ public class IndexController {
 			}
 		}
 
-		List<Vinho> vinhos = (List<Vinho>) vinhoRepository.findAll();
-		mv.addObject("wines", vinhos);
+		List<Sub> subs = (List<Sub>) subRepository.findAll();
+		mv.addObject("submissoes", subs);
 		return mv;
 	}
 
