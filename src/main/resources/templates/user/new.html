@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8"/>
-	<title>Gestão de vinhos - Novo usuário</title>
+	<title>Submissão de Artigos Científicos - Novo usuário</title>
 	<link rel="stylesheet" href="/css/third/semantic.min.css"/>
 	<link rel="stylesheet" href="/css/main.css"/>
 	<link rel="stylesheet" href="/css/login.css"/>
@@ -28,18 +28,9 @@
 						<div class="field">
 							<div class="ui left labeled right icon input">
 								<div class="ui label">
-									Nome Completo:
+									Nome:
 								</div>
-								<input type="text" id="name" th:field="*{name}" placeholder="Nome completo" required="required"/>
-								<i class="user icon"></i>
-							</div>
-						</div>
-                                                <div class="field">
-							<div class="ui left labeled right icon input">
-								<div class="ui label">
-									Nome Usuário:
-								</div>
-								<input type="text" id="username" th:field="*{username}" placeholder="Nome do usuário" required="required"/>
+								<input type="text" id="name" th:field="*{name}" placeholder="Nome do usuário" required="required"/>
 								<i class="user icon"></i>
 							</div>
 						</div>
@@ -48,7 +39,7 @@
 								<div class="ui label">
 									E-mail:
 								</div>
-								<input type="text" id="email" th:field="*{email}" placeholder="E-mail de acesso" required="required"/>
+								<input type="email" id="username" th:field="*{username}" placeholder="E-mail de acesso" required="required"/>
 								<i class="mail icon"></i>
 							</div>
 						</div>
