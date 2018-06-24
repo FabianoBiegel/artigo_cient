@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.edu.ulbra</groupId>
-	<artifactId>ArtigoCientifico</artifactId>
+	<artifactId>gestao-vinhos</artifactId>
 	<version>0.0.3</version>
 	<packaging>jar</packaging>
 
-	<name>ArtigoCientifico</name>
+	<name>gestao-vinhos</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
