@@ -40,17 +40,20 @@ public class AdminUserController {
 		ModelAndView mv = new ModelAndView("admin/usuario/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
+
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
+
+		mv.addObject(StringConstants.ADMIN, true);
 
 		List<User> usuarios = (List<User>) userRepository.findAll();
 		mv.addObject("users", usuarios);
@@ -63,18 +66,19 @@ public class AdminUserController {
 		ModelAndView mv = new ModelAndView("admin/usuario/novo");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
-
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
+		
+		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("roles", roles);
 		mv.addObject("user", user);
 		return mv;
@@ -134,18 +138,18 @@ public class AdminUserController {
 		ModelAndView mv = new ModelAndView("admin/usuario/detalhe");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
-
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
+		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("roles", roles);
 		mv.addObject("user", userInput);
 		return mv;

@@ -40,17 +40,17 @@ public class AdminEventoController {
 		ModelAndView mv = new ModelAndView("admin/evento/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
 
 		mv.addObject(StringConstants.ADMIN, true);
 		List<Evento> eventos = (List<Evento>) eventoRepository.findAll();
@@ -63,18 +63,18 @@ public class AdminEventoController {
 		ModelAndView mv = new ModelAndView("admin/evento/novo");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
-
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
+		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("event", event);
 		return mv;
 	}
@@ -125,18 +125,18 @@ public class AdminEventoController {
 		ModelAndView mv = new ModelAndView("admin/evento/detalhe");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
-
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
+		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("event", eventoInput);
 		return mv;
 	}

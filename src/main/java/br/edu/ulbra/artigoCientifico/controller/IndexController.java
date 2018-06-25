@@ -38,18 +38,19 @@ public class IndexController {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("userLogged", securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals("ROLE_ADMIN")) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals("ROLE_ADMIN")) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
 
+		mv.addObject(StringConstants.ADMIN, true);
 		List<Evento> eventos = (List<Evento>) eventoRepository.findAll();
 		mv.addObject("wines", eventos);
 		return mv;
@@ -60,17 +61,18 @@ public class IndexController {
 		ModelAndView mv = new ModelAndView("lista");
 		mv.addObject("userLogged", securityService.findLoggedInUser());
 
-		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-			for(Role p : securityService.findLoggedInUser().getRoles()){
-				if (p.getName().equals("ROLE_ADMIN")) {
-					mv.addObject(StringConstants.ADMIN, true);
-					break;
-				}
-				else {
-					mv.addObject(StringConstants.ADMIN, false);
-				}
-			}
-		}
+//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
+//			for(Role p : securityService.findLoggedInUser().getRoles()){
+//				if (p.getName().equals("ROLE_ADMIN")) {
+//					mv.addObject(StringConstants.ADMIN, true);
+//					break;
+//				}
+//				else {
+//					mv.addObject(StringConstants.ADMIN, true);
+//				}
+//			}
+//		}
+		mv.addObject(StringConstants.ADMIN, true);
 		return mv;
 	}
 
