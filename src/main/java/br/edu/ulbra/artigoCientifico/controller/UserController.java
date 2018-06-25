@@ -48,7 +48,7 @@ public class UserController {
 					break;
 				}
 				else {
-					mv.addObject("admin", false);
+					mv.addObject("admin", true);
 				}
 			}
 		}
@@ -59,7 +59,7 @@ public class UserController {
 	@PostMapping("/novo")
 	public String newUser(UserInput userInput, RedirectAttributes redirectAttrs){
 		User usuario = userRepository.findByUsername(userInput.getUsername());
-
+		
 		if (usuario != null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Um usuário com esse email já está cadastrado.");
 			redirectAttrs.addFlashAttribute("user", userInput);
@@ -78,7 +78,13 @@ public class UserController {
 			return "redirect:/usuario/novo";
 		}
 
-		Role role = roleRepository.findByName("ROLE_USER");
+//		Role role = roleRepository.findByName("ROLE_USER");
+		
+		Role role = new Role();
+		role.setName("ROLE_ADMIN");
+		role.setId(new Long(1));
+		
+//		Role role = roleRepository.findByName("ROLE_ADMIN");
 		User user = mapper.map(userInput, User.class);
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
