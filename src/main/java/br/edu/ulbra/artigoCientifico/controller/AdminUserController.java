@@ -47,7 +47,7 @@ public class AdminUserController {
 					break;
 				}
 				else {
-					mv.addObject(StringConstants.ADMIN, true);
+					mv.addObject(StringConstants.ADMIN, false);
 				}
 			}
 		}
@@ -102,11 +102,7 @@ public class AdminUserController {
 			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
 		}
 
-		Role role = new Role();
-		role.setName("ROLE_ADMIN");
-		role.setId(new Long(1));
-		
-//		Role role = roleRepository.findById(userInput.getIdRole()).get();
+		Role role = roleRepository.findById(userInput.getIdRole()).get();
 		User user = mapper.map(userInput, User.class);
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);

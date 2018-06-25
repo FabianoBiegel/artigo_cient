@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8"/>
-	<title>Submissão de Artigos Científicos - Novo Evento</title>
+	<title>Artigo Cientifico - Nova Submissao</title>
 	<link rel="stylesheet" href="/css/third/semantic.min.css"/>
 	<link rel="stylesheet" href="/css/main.css"/>
 	<link rel="stylesheet" href="/css/login.css"/>
@@ -14,46 +14,44 @@
 <div class="ui middle aligned center aligned grid">
 	<div class="column">
 		<h2 class="ui header">
-			<div class="content">Cadastrar Evento</div>
+			<div class="content">Cadastrar Submissao</div>
 		</h2>
 		<div class="ui stacked segments">
 			<div class="ui left aligned segment">
-				<a href="/admin/vinho" class="ui blue basic button">
+				<a href="/submissoes" class="ui blue basic button">
 					<i class="chevron left icon"></i>
 					Voltar
 				</a>
 			</div>
 			<div class="ui segment">
-				<form class="ui form" method="POST" enctype="multipart/form-data" th:object="${event}" th:action="@{/admin/evento/novo}">
+				<form class="ui form" method="POST" enctype="multipart/form-data" th:object="${sub}" th:action="@{/submissoes/novo}">
 					<div class="field">
 						<div class="ui left labeled right icon input">
 							<div class="ui label">
-								Usuário Responsável:
+								Usuário:
 							</div>
-							<input type="text" id="usuarioResponsavel" th:field="*{usuarioResponsavel}" placeholder="Usuário Responsável" required="required"/>
+							<input type="text" id="user" th:field="*{user}" placeholder="Usuário criador" required="required"/>
 							<i class="talk icon"></i>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui left labeled right icon input">
 							<div class="ui label">
-								Nome do Evento:
+								Título:
 							</div>
-							<input type="text" id="nomeEvento" th:field="*{nomeEvento}" placeholder="Nome do evento" required="required"/>
+							<input type="text" id="titulo" th:field="*{titulo}" placeholder="Título da submissão" required="required"/>
 							<i class="building icon"></i>
 						</div>
 					</div>
-			<!-- 		
-					<div class="field">
+                                        <div class="field">
 						<div class="ui left labeled right icon input">
 							<div class="ui label">
-								Imagem:
+								Resumo:
 							</div>
-							<input type="file" name="imagem" required="required"/>
-							<i class="file icon"></i>
+							<input type="text" id="Resumo" th:field="*{Resumo}" placeholder="Resumo da submissão" required="required"/>
+							<i class="building icon"></i>
 						</div>
-					</div>
-			-->		
+					</div>										
 					<div class="field">
 						<input type="submit" id="cadastrar" class="ui fluid blue button" value="Cadastrar"/>
 					</div>
