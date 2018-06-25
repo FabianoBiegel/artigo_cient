@@ -40,6 +40,7 @@ public class AdminUserController {
 		ModelAndView mv = new ModelAndView("admin/usuario/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
+
 //		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
 //			for(Role p : securityService.findLoggedInUser().getRoles()){
 //				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
@@ -53,6 +54,7 @@ public class AdminUserController {
 //		}
 
 		mv.addObject(StringConstants.ADMIN, true);
+
 		List<User> usuarios = (List<User>) userRepository.findAll();
 		mv.addObject("users", usuarios);
 		return mv;
@@ -104,11 +106,7 @@ public class AdminUserController {
 			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
 		}
 
-		Role role = new Role();
-		role.setName("ROLE_ADMIN");
-		role.setId(new Long(1));
-		
-//		Role role = roleRepository.findById(userInput.getIdRole()).get();
+		Role role = roleRepository.findById(userInput.getIdRole()).get();
 		User user = mapper.map(userInput, User.class);
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);

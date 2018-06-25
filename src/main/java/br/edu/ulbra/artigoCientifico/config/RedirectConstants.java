@@ -5,6 +5,7 @@ public class RedirectConstants {
     public static final String REDIRECT_ADMIN_USUARIO = "redirect:/admin/usuario/";
     public static final String REDIRECT_ADMIN_USUARIO_NOVO = "redirect:/admin/usuario/novo";
     public static final String REDIRECT_ADMIN_EVENTO = "redirect:/admin/evento/";
+    public static final String REDIRECT_SUBMISSOES = "redirect:/submissoes/";
     public static final String REDIRECT_INICIO = "redirect:/inicio";
 
     private RedirectConstants(){}

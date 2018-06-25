@@ -30,8 +30,7 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public String index(){
-//		return "redirect:/inicio";
-		return "redirect:/admin";
+		return "redirect:/inicio";
 	}
 
 	@RequestMapping("/inicio")
@@ -53,7 +52,7 @@ public class IndexController {
 
 		mv.addObject(StringConstants.ADMIN, true);
 		List<Evento> eventos = (List<Evento>) eventoRepository.findAll();
-		mv.addObject("events", eventos);
+		mv.addObject("wines", eventos);
 		return mv;
 	}
 

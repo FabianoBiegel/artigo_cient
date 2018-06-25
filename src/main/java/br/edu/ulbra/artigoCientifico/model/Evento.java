@@ -8,6 +8,9 @@ public class Evento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+        
+        @ManyToOne(optional = true)
+        private Submissao submissao;    
 
 	@Column(nullable = false)
 	String usuarioResponsavel;
@@ -47,6 +50,14 @@ public class Evento {
 	public void setNomeEvento(String vinicola) {
 		this.nomeEvento = vinicola;
 	}
+        
+        public Submissao getSub() {
+                return submissao;
+        }
+
+        public void setSub(Submissao sub) {
+                this.submissao = sub;
+        }
 
 //	public String getNomeImagem() {
 //		return nomeImagem;
