@@ -104,6 +104,9 @@ public class AdminEventoController {
 
 		event.setUsuarioResponsavel(eventInput.getUsuarioResponsavel());
 		event.setNomeEvento(eventInput.getNomeEvento());
+                event.setDataEvento(eventInput.getDataEvento());
+                event.setDataAbertura(eventInput.getDataAbertura());
+                event.setDataFechamento(eventInput.getDataFechamento());
 		eventoRepository.save(event);
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Evento alterado com sucesso.");
 		return RedirectConstants.REDIRECT_EVENTO + idEvento;

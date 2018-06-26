@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Date;
 import java.util.List;
 import br.edu.ulbra.artigoCientifico.repository.SubmissaoRepository;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
@@ -143,7 +143,7 @@ public class SubmissaoController {
 	}
 
 	@PostMapping("/{id}")
-	public String salvarEvento(@PathVariable("id") Long idEvento, SubmissaoInput subInput, RedirectAttributes redirectAttrs) throws IOException {
+	public String salvarEvento(@PathVariable("id") Long idEvento, SubmissaoInput subInput, RedirectAttributes redirectAttrs) throws IOException, ParseException {
 		Submissao sub = submissaoRepository.findById(idEvento).get();
 
 		if (sub == null) {
@@ -164,10 +164,9 @@ public class SubmissaoController {
 		sub.setTitulo(subInput.getTitulo());
                 sub.setResumo(subInput.getResumo());
                 sub.setUser(subInput.getUser());
+                                
+                sub.setDataSubmissao(subInput.getDataSubmissao());
                 
-                Date date = new Date();
-                
-                sub.setDataSubmissao(date);
                 sub.setSubArq(subInput.getSubArq());
 
 		submissaoRepository.save(sub);
