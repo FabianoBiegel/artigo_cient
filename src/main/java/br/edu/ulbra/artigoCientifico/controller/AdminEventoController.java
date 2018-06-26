@@ -80,7 +80,7 @@ public class AdminEventoController {
 
 		EventoInput eventoInput = mapper.map(evento, EventoInput.class);
 
-		ModelAndView mv = new ModelAndView("eventos/detalhe");
+		ModelAndView mv = new ModelAndView("evento/detalhe");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
 		mv.addObject(StringConstants.ADMIN, true);
