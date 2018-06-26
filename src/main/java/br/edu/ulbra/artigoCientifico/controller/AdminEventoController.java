@@ -24,10 +24,8 @@ import java.util.List;
 //import java.util.UUID;
 
 @Controller
-@RequestMapping("/admin/evento")
+@RequestMapping("/eventos")
 public class AdminEventoController {
-//	@Value("${gestao-vinhos.uploadFilePath}")
-//	private String uploadFilePath;
 	@Autowired
 	EventoRepository eventoRepository;
 	@Autowired
@@ -37,21 +35,8 @@ public class AdminEventoController {
 
 	@RequestMapping()
 	public ModelAndView listaEventos() {
-		ModelAndView mv = new ModelAndView("admin/evento/lista");
+		ModelAndView mv = new ModelAndView("evento/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
-
 		mv.addObject(StringConstants.ADMIN, true);
 		List<Evento> eventos = (List<Evento>) eventoRepository.findAll();
 		mv.addObject("events", eventos);
@@ -60,20 +45,8 @@ public class AdminEventoController {
 
 	@GetMapping("/novo")
 	public ModelAndView novoVinhoForm(@ModelAttribute("event") EventoInput event){
-		ModelAndView mv = new ModelAndView("admin/evento/novo");
+		ModelAndView mv = new ModelAndView("evento/novo");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("event", event);
 		return mv;
@@ -81,34 +54,17 @@ public class AdminEventoController {
 
 	@PostMapping("/novo")
 	public String novoVinho(EventoInput eventInput, RedirectAttributes redirectAttrs) throws IOException {
-//		if (wineInput.getNome().length() == 0 || wineInput.getVinicola().length() == 0 || wineInput.getImagem() == null || (wineInput.getImagem() != null && wineInput.getImagem().isEmpty()))
 		if (eventInput.getUsuarioResponsavel().length() == 0 || eventInput.getNomeEvento().length() == 0)
 		{
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Você precisa informar todos os campos.");
 			redirectAttrs.addFlashAttribute("event", eventInput);
-			return "redirect:/admin/evento/novo";
+			return "redirect:/eventos/novo";
 		}
 
 		Evento event = mapper.map(eventInput, Evento.class);
-
-//		File folderPath = new File(uploadFilePath);
-//		folderPath.mkdirs();
-
-//		MultipartFile imagemFile = wineInput.getImagem();
-//		String fileName = UUID.randomUUID().toString() + "-" + imagemFile.getOriginalFilename();
-//		File file = new File(Paths.get(uploadFilePath, fileName).toString());
-//		if (!file.createNewFile()){
-//			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Arquivo de upload nao pode ser criado.");
-//			redirectAttrs.addFlashAttribute("wine", wineInput);
-//			return "redirect:/admin/vinho/novo";
-//		}
-//		imagemFile.transferTo(file);
-//		wine.setNomeImagem(fileName);
-
 		eventoRepository.save(event);
-
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Evento cadastrado com sucesso.");
-		return RedirectConstants.REDIRECT_ADMIN_EVENTO;
+		return RedirectConstants.REDIRECT_EVENTO;
 	}
 
 	@GetMapping("/{id}")
@@ -117,25 +73,13 @@ public class AdminEventoController {
 
 		if (evento == null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "O evento solicitado não existe.");
-			return new ModelAndView("redirect:/admin/evento");
+			return new ModelAndView("redirect:/eventos");
 		}
 
 		EventoInput eventoInput = mapper.map(evento, EventoInput.class);
 
-		ModelAndView mv = new ModelAndView("admin/evento/detalhe");
+		ModelAndView mv = new ModelAndView("evento/detalhe");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("event", eventoInput);
 		return mv;
@@ -148,38 +92,21 @@ public class AdminEventoController {
 		if (event == null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Esse evento não existe.");
 			redirectAttrs.addFlashAttribute("user", eventInput);
-			return RedirectConstants.REDIRECT_ADMIN_EVENTO + idEvento;
+			return RedirectConstants.REDIRECT_EVENTO + idEvento;
 		}
 
 		if (eventInput.getUsuarioResponsavel().length() == 0 || eventInput.getNomeEvento().length() == 0 )
 		{
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Você precisa informar os campos de usuarioResponsavel e nomeEvento.");
 			redirectAttrs.addFlashAttribute("event", eventInput);
-			return RedirectConstants.REDIRECT_ADMIN_EVENTO + idEvento;
+			return RedirectConstants.REDIRECT_EVENTO + idEvento;
 		}
 
-//		if (wineInput.getImagem() != null && !wineInput.getImagem().isEmpty()) {
-//			MultipartFile imagemFile = wineInput.getImagem();
-//			String fileName = UUID.randomUUID().toString() + "-" + imagemFile.getOriginalFilename();
-//			File file = new File(Paths.get(uploadFilePath, fileName).toString());
-//			if (!file.createNewFile()){
-//				redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Arquivo nao pode ser criado.");
-//				redirectAttrs.addFlashAttribute("user", wineInput);
-//				return RedirectConstants.REDIRECT_ADMIN_EVENTO + idVinho;
-//			}
-//			imagemFile.transferTo(file);
-//			wine.setNomeImagem(fileName);
-//		}
-//
-//		wine.setNome(wineInput.getNome());
 		event.setUsuarioResponsavel(eventInput.getUsuarioResponsavel());
 		event.setNomeEvento(eventInput.getNomeEvento());
-
 		eventoRepository.save(event);
-
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Evento alterado com sucesso.");
-
-		return RedirectConstants.REDIRECT_ADMIN_EVENTO + idEvento;
+		return RedirectConstants.REDIRECT_EVENTO + idEvento;
 	}
 
 	@RequestMapping("/{id}/delete")
@@ -191,6 +118,6 @@ public class AdminEventoController {
 			eventoRepository.delete(evento);
 			redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Evento deletado com sucesso.");
 		}
-		return "redirect:/admin/evento";
+		return "redirect:/eventos";
 	}
 }

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/admin/usuario")
+@RequestMapping("/usuarios")
 public class AdminUserController {
 	@Autowired
 	SecurityService securityService;
@@ -37,24 +37,10 @@ public class AdminUserController {
 
 	@RequestMapping()
 	public ModelAndView listaUsuarios() {
-		ModelAndView mv = new ModelAndView("admin/usuario/lista");
+		ModelAndView mv = new ModelAndView("usuario/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
-
 		mv.addObject(StringConstants.ADMIN, true);
-
 		List<User> usuarios = (List<User>) userRepository.findAll();
 		mv.addObject("users", usuarios);
 		return mv;
@@ -63,21 +49,8 @@ public class AdminUserController {
 	@GetMapping("/novo")
 	public ModelAndView novoUsuarioForm(@ModelAttribute("user") UserInput user){
 		List<Role> roles = (List<Role>)roleRepository.findAll();
-		ModelAndView mv = new ModelAndView("admin/usuario/novo");
+		ModelAndView mv = new ModelAndView("usuario/novo");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
-		
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("roles", roles);
 		mv.addObject("user", user);
@@ -91,19 +64,19 @@ public class AdminUserController {
 		if (usuario != null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Um usuário com esse email já está cadastrado.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
+			return RedirectConstants.REDIRECT_USUARIO_NOVO;
 		}
 
 		if (userInput.getPassword().length() == 0) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Uma senha deve ser informada.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
+			return RedirectConstants.REDIRECT_USUARIO_NOVO;
 		}
 
 		if (!userInput.getPassword().equals(userInput.getPasswordConfirm())) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Senha e confirmação de senha não são iguais.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
+			return RedirectConstants.REDIRECT_USUARIO_NOVO;
 		}
 
 		Role role = roleRepository.findById(userInput.getIdRole()).get();
@@ -114,7 +87,7 @@ public class AdminUserController {
 		userService.save(user);
 
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Usuário cadastrado com sucesso.");
-		return RedirectConstants.REDIRECT_ADMIN_USUARIO;
+		return RedirectConstants.REDIRECT_USUARIO;
 	}
 
 	@GetMapping("/{id}")
@@ -123,7 +96,7 @@ public class AdminUserController {
 
 		if (usuario == null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "O usuário solicitado não existe.");
-			return new ModelAndView(RedirectConstants.REDIRECT_ADMIN_USUARIO);
+			return new ModelAndView(RedirectConstants.REDIRECT_USUARIO);
 		}
 
 		UserInput userInput = mapper.map(usuario, UserInput.class);
@@ -135,20 +108,9 @@ public class AdminUserController {
 
 		List<Role> roles = (List<Role>)roleRepository.findAll();
 
-		ModelAndView mv = new ModelAndView("admin/usuario/detalhe");
+		ModelAndView mv = new ModelAndView("usuario/detalhe");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("roles", roles);
 		mv.addObject("user", userInput);
@@ -162,20 +124,20 @@ public class AdminUserController {
 		if (usuario == null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Esse usuário não existe.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return "redirect:/admin/usuario/" + idUsuario;
+			return "redirect:/usuarios/" + idUsuario;
 		}
 
 		User usuarioTest = userRepository.findByUsername(userInput.getUsername());
 		if (usuarioTest != null && !usuario.getUsername().equals(usuarioTest.getUsername())) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Um usuário com esse email já está cadastrado.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
+			return RedirectConstants.REDIRECT_USUARIO + idUsuario;
 		}
 
 		if (userInput.getPassword().length() != 0 && !userInput.getPassword().equals(userInput.getPasswordConfirm())) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Senha e confirmação de senha não são iguais.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
+			return RedirectConstants.REDIRECT_USUARIO + idUsuario;
 		}
 
 		usuario.setName(userInput.getName());
@@ -188,12 +150,12 @@ public class AdminUserController {
 
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Usuário alterado com sucesso.");
 		redirectAttrs.addFlashAttribute("user", userInput);
-		return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
+		return RedirectConstants.REDIRECT_USUARIO + idUsuario;
 	}
 
 	@PostMapping("/{id}/resetSenha")
 	public String resetarSenhaUsuario(@PathVariable("id") Long idUsuario){
-		return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
+		return RedirectConstants.REDIRECT_USUARIO + idUsuario;
 	}
 
 	@RequestMapping("/{id}/delete")
@@ -206,6 +168,6 @@ public class AdminUserController {
 			redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Usuário deletado com sucesso.");
 		}
 
-		return RedirectConstants.REDIRECT_ADMIN_USUARIO;
+		return RedirectConstants.REDIRECT_USUARIO;
 	}
 }
