@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/usuario2")
+@RequestMapping("/usuario")
 public class UserController {
 	@Autowired
 	UserRepository userRepository;
