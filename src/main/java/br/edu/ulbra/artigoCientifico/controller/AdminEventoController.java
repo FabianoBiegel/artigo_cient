@@ -21,6 +21,7 @@ import br.edu.ulbra.artigoCientifico.service.interfaces.SecurityService;
 import java.io.IOException;
 //import java.nio.file.Paths;
 import java.util.List;
+//import java.util.UUID;
 
 @Controller
 @RequestMapping("/eventos")
@@ -36,7 +37,6 @@ public class AdminEventoController {
 	public ModelAndView listaEventos() {
 		ModelAndView mv = new ModelAndView("evento/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
 		mv.addObject(StringConstants.ADMIN, true);
 		List<Evento> eventos = (List<Evento>) eventoRepository.findAll();
 		mv.addObject("events", eventos);
@@ -47,7 +47,6 @@ public class AdminEventoController {
 	public ModelAndView novoVinhoForm(@ModelAttribute("event") EventoInput event){
 		ModelAndView mv = new ModelAndView("evento/novo");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("event", event);
 		return mv;
@@ -59,12 +58,11 @@ public class AdminEventoController {
 		{
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Você precisa informar todos os campos.");
 			redirectAttrs.addFlashAttribute("event", eventInput);
-			return "redirect:eventos/novo";
+			return "redirect:/eventos/novo";
 		}
 
 		Evento event = mapper.map(eventInput, Evento.class);
 		eventoRepository.save(event);
-
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Evento cadastrado com sucesso.");
 		return RedirectConstants.REDIRECT_EVENTO;
 	}
@@ -80,9 +78,8 @@ public class AdminEventoController {
 
 		EventoInput eventoInput = mapper.map(evento, EventoInput.class);
 
-		ModelAndView mv = new ModelAndView("eventos/detalhe");
+		ModelAndView mv = new ModelAndView("evento/detalhe");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("event", eventoInput);
 		return mv;
@@ -107,11 +104,8 @@ public class AdminEventoController {
 
 		event.setUsuarioResponsavel(eventInput.getUsuarioResponsavel());
 		event.setNomeEvento(eventInput.getNomeEvento());
-
 		eventoRepository.save(event);
-
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Evento alterado com sucesso.");
-
 		return RedirectConstants.REDIRECT_EVENTO + idEvento;
 	}
 
@@ -124,6 +118,6 @@ public class AdminEventoController {
 			eventoRepository.delete(evento);
 			redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Evento deletado com sucesso.");
 		}
-		return "redirect:eventos";
+		return "redirect:/eventos";
 	}
 }

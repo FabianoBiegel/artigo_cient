@@ -37,24 +37,10 @@ public class AdminUserController {
 
 	@RequestMapping()
 	public ModelAndView listaUsuarios() {
-		ModelAndView mv = new ModelAndView("admin/usuario/lista");
+		ModelAndView mv = new ModelAndView("usuario/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
-
 		mv.addObject(StringConstants.ADMIN, true);
-
 		List<User> usuarios = (List<User>) userRepository.findAll();
 		mv.addObject("users", usuarios);
 		return mv;
@@ -63,21 +49,8 @@ public class AdminUserController {
 	@GetMapping("/novo")
 	public ModelAndView novoUsuarioForm(@ModelAttribute("user") UserInput user){
 		List<Role> roles = (List<Role>)roleRepository.findAll();
-		ModelAndView mv = new ModelAndView("admin/usuario/novo");
+		ModelAndView mv = new ModelAndView("usuario/novo");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
-		
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("roles", roles);
 		mv.addObject("user", user);
@@ -135,20 +108,9 @@ public class AdminUserController {
 
 		List<Role> roles = (List<Role>)roleRepository.findAll();
 
-		ModelAndView mv = new ModelAndView("admin/usuario/detalhe");
+		ModelAndView mv = new ModelAndView("usuario/detalhe");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals(StringConstants.ROLE_ADMIN)) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
 		mv.addObject(StringConstants.ADMIN, true);
 		mv.addObject("roles", roles);
 		mv.addObject("user", userInput);
@@ -162,7 +124,7 @@ public class AdminUserController {
 		if (usuario == null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Esse usuário não existe.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return "redirect:/admin/usuario/" + idUsuario;
+			return "redirect:/usuarios/" + idUsuario;
 		}
 
 		User usuarioTest = userRepository.findByUsername(userInput.getUsername());

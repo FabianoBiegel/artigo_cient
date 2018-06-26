@@ -21,8 +21,6 @@ import java.util.List;
 
 @Controller
 public class IndexController {
-//	@Value("${gestao-vinhos.uploadFilePath}")
-//	private String uploadFilePath;
 	@Autowired
 	SecurityService securityService;
 	@Autowired
@@ -37,19 +35,6 @@ public class IndexController {
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("userLogged", securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals("ROLE_ADMIN")) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
-
 		mv.addObject(StringConstants.ADMIN, true);
 		List<Evento> eventos = (List<Evento>) eventoRepository.findAll();
 		mv.addObject("wines", eventos);
@@ -60,23 +45,10 @@ public class IndexController {
 	public ModelAndView minhalista() {
 		ModelAndView mv = new ModelAndView("lista");
 		mv.addObject("userLogged", securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals("ROLE_ADMIN")) {
-//					mv.addObject(StringConstants.ADMIN, true);
-//					break;
-//				}
-//				else {
-//					mv.addObject(StringConstants.ADMIN, true);
-//				}
-//			}
-//		}
 		mv.addObject(StringConstants.ADMIN, true);
 		return mv;
 	}
 
-//	@GetMapping("/images/{fileName:.+}")
 //	@ResponseBody
 //	public FileSystemResource getFile(@PathVariable("fileName") String fileName){
 //		return new FileSystemResource(Paths.get(uploadFilePath, fileName).toString());
