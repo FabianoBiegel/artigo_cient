@@ -26,7 +26,7 @@ public class Submissao {
     String Resumo;
 
     @Column(nullable = true)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     Date dataSubmissao;
 
     @Column(nullable = true)

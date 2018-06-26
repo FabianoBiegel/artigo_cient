@@ -18,13 +18,13 @@
 		</h2>
 		<div class="ui stacked segments">
 			<div class="ui left aligned segment">
-				<a href="/eventos" class="ui blue basic button">
+				<a href="/admin/vinho" class="ui blue basic button">
 					<i class="chevron left icon"></i>
 					Voltar
 				</a>
 			</div>
 			<div class="ui segment">
-				<form class="ui form" method="POST" enctype="multipart/form-data" th:object="${event}" th:action="@{/eventos/novo}">
+				<form class="ui form" method="POST" enctype="multipart/form-data" th:object="${event}" th:action="@{/admin/evento/novo}">
 					<div class="field">
 						<div class="ui left labeled right icon input">
 							<div class="ui label">
@@ -43,33 +43,17 @@
 							<i class="building icon"></i>
 						</div>
 					</div>
-                                        <div class="field">
+			<!-- 		
+					<div class="field">
 						<div class="ui left labeled right icon input">
 							<div class="ui label">
-								Data:
+								Imagem:
 							</div>
-							<input type="date" id="dataEvento" th:field="*{dataEvento}" placeholder="Data do evento"/>
-							<i class="building icon"></i>
+							<input type="file" name="imagem" required="required"/>
+							<i class="file icon"></i>
 						</div>
 					</div>
-                                        <div class="field">
-						<div class="ui left labeled right icon input">
-							<div class="ui label">
-								Data Abertura:
-							</div>
-							<input type="date" id="dataAbertura" th:field="*{dataAbertura}" placeholder="Data da Abertura"/>
-							<i class="building icon"></i>
-						</div>
-					</div>
-                                        <div class="field">
-						<div class="ui left labeled right icon input">
-							<div class="ui label">
-								Data Fechamento:
-							</div>
-							<input type="date" id="dataFechamento" th:field="*{dataFechamento}" placeholder="Data do fechamento"/>
-							<i class="building icon"></i>
-						</div>
-					</div>
+			-->		
 					<div class="field">
 						<input type="submit" id="cadastrar" class="ui fluid blue button" value="Cadastrar"/>
 					</div>
