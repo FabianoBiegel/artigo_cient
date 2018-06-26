@@ -147,14 +147,14 @@ public class SubmissaoController {
 		if (sub == null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Esse evento não existe.");
 			redirectAttrs.addFlashAttribute("user", subInput);
-			return RedirectConstants.REDIRECT_ADMIN_EVENTO + idEvento;
+			return RedirectConstants.REDIRECT_EVENTO + idEvento;
 		}
 
 		/*if (subInput.getUsuarioResponsavel().length() == 0 || subInput.getNomeEvento().length() == 0 )
 		{
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Você precisa informar os campos de usuarioResponsavel e nomeEvento.");
 			redirectAttrs.addFlashAttribute("event", eventInput);
-			return RedirectConstants.REDIRECT_ADMIN_EVENTO + idEvento;
+			return RedirectConstants.REDIRECT_EVENTO + idEvento;
 		}*/
 
 
