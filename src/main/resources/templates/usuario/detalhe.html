@@ -24,7 +24,7 @@
 				</a>
 			</div>
 			<div class="ui segment">
-				<form class="ui form" method="POST" th:object="${user}" th:action="@{/admin/usuario/{id}(id=${user.id})}">
+				<form class="ui form" method="POST" th:object="${user}" th:action="@{/usuarios/{id}(id=${user.id})}">
 					<input type="hidden" th:field="*{id}"/>
 					<div class="field">
 						<div class="ui left labeled right icon input">

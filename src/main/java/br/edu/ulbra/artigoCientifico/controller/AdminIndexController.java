@@ -26,18 +26,6 @@ public class AdminIndexController {
 	public ModelAndView home(){
 		ModelAndView mv = new ModelAndView("admin/inicio");
 		mv.addObject("userLogged", securityService.findLoggedInUser());
-
-//		if (securityService.findLoggedInUser() != null && securityService.findLoggedInUser().getRoles() != null) {
-//			for(Role p : securityService.findLoggedInUser().getRoles()){
-//				if (p.getName().equals("ROLE_ADMIN")) {
-//					mv.addObject("admin", true);
-//					break;
-//				}
-//				else {
-//					mv.addObject("admin", true);
-//				}
-//			}
-//		}
 		mv.addObject("admin", true);
 		return mv;
 	}

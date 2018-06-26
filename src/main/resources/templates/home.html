@@ -30,20 +30,18 @@
 		<div id="titleContainer" class="ui items">
 			<div class="item">
 				<div class="content">
-					<h1 class="ui header">Escolha sua opção</h1>
+					<h1 class="ui header">Escolha sua opç&atilde;o</h1>
 				</div>
 			</div>
 		</div>
 		<div class="ui divider clear"></div>
-		
-		<!--
 		<div class="ui divided items">
 			<div class="item" th:each="event: ${events}">
-			
+			<!--
 				<a class="image" th:href="@{ /vinhos/vinho/{id}(id=${wine.id}) }">
 					<img th:src="@{ /images/{filename}(filename=${wine.nomeImagem}) }"/>
 				</a>
-				
+			-->	
 				<div class="content">
 					<a class="header" th:text="${event.nome}" th:href="@{ /eventos/evento/{id}(id=${event.id}) }"></a>
 					<div class="meta">
@@ -52,8 +50,6 @@
 				</div>
 			</div>
 		</div>
-		-->
-		
 	</div>
 	<script src="/js/main.js" charset="utf-8"></script>
 </body>
