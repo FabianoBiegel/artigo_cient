@@ -24,8 +24,8 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
 
-gestao-vinhos:
-  uploadFilePath: "/tmp/gestao-vinhos/files"
+artigoCientifico:
+  uploadFilePath: "/tmp/artigoCientifico/files"
 management:
   endpoints:
     enabled-by-default: true

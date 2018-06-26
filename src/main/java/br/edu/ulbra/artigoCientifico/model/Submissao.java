@@ -1,5 +1,6 @@
 package br.edu.ulbra.artigoCientifico.model;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class Submissao {
     Date dataSubmissao;
 
     @Column(nullable = true)
-    String SubArq;
+    File subArq;
 
     @OneToMany(mappedBy = "submissao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Evento> eventos;
@@ -64,23 +65,7 @@ public class Submissao {
 
     public void setResumo(String resumo) {
         this.Resumo = resumo;
-    }
-
-    public Date getdataSubmissao() {
-        return dataSubmissao;
-    }
-
-    public void setdataSubmissao(Date dataUp) {
-        this.dataSubmissao = dataUp;
-    }
-
-    public String getSubArq() {
-        return SubArq;
-    }
-
-    public void setSubArq(String subArq) {
-        this.SubArq = subArq;
-    }
+    }    
 
     public Set<Evento> getEventos() {
         return eventos;
@@ -98,4 +83,20 @@ public class Submissao {
         this.id = id;
     }
 
+    public Date getDataSubmissao() {
+        return dataSubmissao;
+    }
+
+    public void setDataSubmissao(Date dataSubmissao) {
+        this.dataSubmissao = dataSubmissao;
+    }
+
+    public File getSubArq() {
+        return subArq;
+    }
+
+    public void setSubArq(File subArq) {
+        this.subArq = subArq;
+    }
+    
 }

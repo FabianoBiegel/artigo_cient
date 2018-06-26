@@ -13,11 +13,11 @@
 	<div th:include="fragments/menu"></div>
 	<div class="ui container segment">
 		<div class="ui fluid buttons">
-			<a href="/eventos" class="ui disabled button">Eventos</a>
+			<a href="/admin/evento" class="ui button">Eventos</a>
 			<div class="or" data-text="ou"></div>
-            <a href="/submissoes" class="ui button">Submissões</a>
+                        <a href="/submissoes" class="ui button">Submissões</a>
 			<div class="or" data-text="ou"></div>
-			<a href="/usuarios" class="ui button">Usuários</a>
+			<a href="/admin/usuario" class="ui button">Usuários</a>
 		</div>
 	</div>
 	<div class="ui container" th:if="${error}">
@@ -33,7 +33,7 @@
 					<h1 class="ui header">Eventos</h1>
 				</div>
 				<div class="right floated content">
-					<a href="/eventos/novo" class="ui right floated medium green labeled icon button">
+					<a href="/admin/evento/novo" class="ui right floated medium green labeled icon button">
 						<i class="plus icon"></i>
 						Adicionar Evento
 					</a>
@@ -41,27 +41,26 @@
 			</div>
 		</div>
 		<div class="ui divider clear"></div>
-		
-	<!--	
-		
 		<div class="ui divided items">
 			<div class="item" th:each="event: ${events}">
+         <!--  <a class="image" th:href="@{ /admin/vinho/{id}(id=${wine.id}) }">
+					<img th:src="@{ /images/{filename}(filename=${wine.nomeImagem}) }"/>
+				</a>
+	          -->
 				<div class="content">
-					<a class="header" th:text="${event.usuarioResponsavel}" th:href="@{ /eventos/{id}(id=${event.id}) }"></a>
+					<a class="header" th:text="${event.usuarioResponsavel}" th:href="@{ /admin/evento/{id}(id=${event.id}) }"></a>
 					<div class="meta">
-						<a th:href="@{ /eventos/{id}(id=${event.id}) }" th:text="${event.nomeEvento}"></a>
+						<a th:href="@{ /admin/evento/{id}(id=${event.id}) }" th:text="${event.nomeEvento}"></a>
 					</div>
 				</div>
 				<div class="content">
-					<a class="ui right floated red labeled icon tiny button" th:href="@{ /eventos/{id}/delete(id=${event.id}) }">
+					<a class="ui right floated red labeled icon tiny button" th:href="@{ /admin/evento/{id}/delete(id=${event.id}) }">
 						Excluir
 						<i class="trash icon"></i>
 					</a>
 				</div>
 			</div>
 		</div>
-		
-		-->
 	</div>
 	<script src="/js/main.js" charset="utf-8"></script>
 </body>

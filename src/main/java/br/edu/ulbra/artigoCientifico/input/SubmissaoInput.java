@@ -1,6 +1,7 @@
 package br.edu.ulbra.artigoCientifico.input;
 
 //import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
 import java.util.Date;
 
 public class SubmissaoInput {
@@ -15,7 +16,7 @@ public class SubmissaoInput {
 
     private Date dataSubmissao;
 
-    private String SubArq;
+    private File SubArq;
 
     public String getEvento() {
         return evento;
@@ -57,12 +58,14 @@ public class SubmissaoInput {
         this.dataSubmissao = dataSubmissao;
     }
 
-    public String getSubArq() {
+    public File getSubArq() {
         return SubArq;
     }
 
-    public void setSubArq(String SubArq) {
+    public void setSubArq(File SubArq) {
         this.SubArq = SubArq;
     }
+
+    
 
 }

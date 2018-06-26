@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping("/admin/usuario")
 public class AdminUserController {
 	@Autowired
 	SecurityService securityService;
@@ -91,19 +91,19 @@ public class AdminUserController {
 		if (usuario != null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Um usuário com esse email já está cadastrado.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_USUARIO_NOVO;
+			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
 		}
 
 		if (userInput.getPassword().length() == 0) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Uma senha deve ser informada.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_USUARIO_NOVO;
+			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
 		}
 
 		if (!userInput.getPassword().equals(userInput.getPasswordConfirm())) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Senha e confirmação de senha não são iguais.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_USUARIO_NOVO;
+			return RedirectConstants.REDIRECT_ADMIN_USUARIO_NOVO;
 		}
 
 		Role role = roleRepository.findById(userInput.getIdRole()).get();
@@ -114,7 +114,7 @@ public class AdminUserController {
 		userService.save(user);
 
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Usuário cadastrado com sucesso.");
-		return RedirectConstants.REDIRECT_USUARIO;
+		return RedirectConstants.REDIRECT_ADMIN_USUARIO;
 	}
 
 	@GetMapping("/{id}")
@@ -123,7 +123,7 @@ public class AdminUserController {
 
 		if (usuario == null) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "O usuário solicitado não existe.");
-			return new ModelAndView(RedirectConstants.REDIRECT_USUARIO);
+			return new ModelAndView(RedirectConstants.REDIRECT_ADMIN_USUARIO);
 		}
 
 		UserInput userInput = mapper.map(usuario, UserInput.class);
@@ -169,13 +169,13 @@ public class AdminUserController {
 		if (usuarioTest != null && !usuario.getUsername().equals(usuarioTest.getUsername())) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Um usuário com esse email já está cadastrado.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_USUARIO + idUsuario;
+			return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
 		}
 
 		if (userInput.getPassword().length() != 0 && !userInput.getPassword().equals(userInput.getPasswordConfirm())) {
 			redirectAttrs.addFlashAttribute(StringConstants.ERROR, "Senha e confirmação de senha não são iguais.");
 			redirectAttrs.addFlashAttribute("user", userInput);
-			return RedirectConstants.REDIRECT_USUARIO + idUsuario;
+			return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
 		}
 
 		usuario.setName(userInput.getName());
@@ -188,12 +188,12 @@ public class AdminUserController {
 
 		redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Usuário alterado com sucesso.");
 		redirectAttrs.addFlashAttribute("user", userInput);
-		return RedirectConstants.REDIRECT_USUARIO + idUsuario;
+		return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
 	}
 
 	@PostMapping("/{id}/resetSenha")
 	public String resetarSenhaUsuario(@PathVariable("id") Long idUsuario){
-		return RedirectConstants.REDIRECT_USUARIO + idUsuario;
+		return RedirectConstants.REDIRECT_ADMIN_USUARIO + idUsuario;
 	}
 
 	@RequestMapping("/{id}/delete")
@@ -206,6 +206,6 @@ public class AdminUserController {
 			redirectAttrs.addFlashAttribute(StringConstants.SUCCESS, "Usuário deletado com sucesso.");
 		}
 
-		return RedirectConstants.REDIRECT_USUARIO;
+		return RedirectConstants.REDIRECT_ADMIN_USUARIO;
 	}
 }

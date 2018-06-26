@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Submissão de Artigos Científicos - Lista de Submissoes</title>
+	<title>Artigo Cientifico - Lista de Submissoes</title>
 	<link rel="stylesheet" href="/css/third/semantic.min.css"/>
 	<link rel="stylesheet" href="/css/main.css"/>
 	<link rel="stylesheet" href="/css/login.css"/>
@@ -13,11 +13,11 @@
 	<div th:include="fragments/menu"></div>
 	<div class="ui container segment">
 		<div class="ui fluid buttons">
-			<a href="/eventos" class="ui button">Eventos</a>
+			<a href="/admin/evento" class="ui button">Eventos</a>
 			<div class="or" data-text="ou"></div>
-            <a href="/submissoes" class="ui disabled button">Submissões</a>
+                        <a href="/submissoes" class="ui button">Submissões</a>
 			<div class="or" data-text="ou"></div>
-			<a href="/usuarios" class="ui button">Usuários</a>
+			<a href="/admin/usuario" class="ui button">Usuários</a>
 		</div>
 	</div>
 	<div class="ui container" th:if="${error}">
