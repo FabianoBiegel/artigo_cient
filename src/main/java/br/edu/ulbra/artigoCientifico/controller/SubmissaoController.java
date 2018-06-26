@@ -3,8 +3,10 @@ package br.edu.ulbra.artigoCientifico.controller;
 import br.edu.ulbra.artigoCientifico.config.RedirectConstants;
 import br.edu.ulbra.artigoCientifico.config.StringConstants;
 import br.edu.ulbra.artigoCientifico.input.SubmissaoInput;
+import br.edu.ulbra.artigoCientifico.model.Evento;
 import br.edu.ulbra.artigoCientifico.model.Role;
 import br.edu.ulbra.artigoCientifico.model.Submissao;
+import br.edu.ulbra.artigoCientifico.repository.EventoRepository;
 import br.edu.ulbra.artigoCientifico.service.interfaces.SecurityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
@@ -32,11 +34,15 @@ public class SubmissaoController {
 	SubmissaoRepository submissaoRepository;
 	@Autowired
 	SecurityService securityService;
+        @Autowired
+	EventoRepository eventoRepository;
 
 	private ModelMapper mapper = new ModelMapper();
 
 	@RequestMapping()
 	public ModelAndView listaSubmissoes() {
+                //Evento event = eventoRepository.findById(2).get();
+            
 		ModelAndView mv = new ModelAndView("submissao/lista");
 		mv.addObject(StringConstants.USER_LOGGED, securityService.findLoggedInUser());
 
@@ -54,7 +60,10 @@ public class SubmissaoController {
 
 		mv.addObject(StringConstants.ADMIN, true);
 		List<Submissao> subs = (List<Submissao>) submissaoRepository.findAll();
-		mv.addObject("subs", subs);
+		mv.addObject("subs", subs);                
+                
+                List<Evento> event = (List<Evento>) eventoRepository.findAll();                                
+                mv.addObject("events", event);
 		return mv;
 	}
 
@@ -76,6 +85,9 @@ public class SubmissaoController {
 		}
 
 		mv.addObject("sub", sub);
+                
+                List<Evento> events = (List<Evento>) eventoRepository.findAll();
+		mv.addObject("events", events);
 		return mv;
 	}
 
@@ -137,6 +149,9 @@ public class SubmissaoController {
 				}
 			}
 		}
+                
+                List<Evento> events = (List<Evento>) eventoRepository.findAll();
+		mv.addObject("events", events);
 
 		mv.addObject("sub", sub);
 		return mv;
@@ -158,9 +173,7 @@ public class SubmissaoController {
 			redirectAttrs.addFlashAttribute("event", eventInput);
 			return RedirectConstants.REDIRECT_EVENTO + idEvento;
 		}*/
-
-
-		sub.setEvento(subInput.getEvento());
+		
 		sub.setTitulo(subInput.getTitulo());
                 sub.setResumo(subInput.getResumo());
                 sub.setUser(subInput.getUser());
@@ -168,6 +181,8 @@ public class SubmissaoController {
                 sub.setDataSubmissao(subInput.getDataSubmissao());
                 
                 sub.setSubArq(subInput.getSubArq());
+                
+                sub.setEventos(subInput.getEventos());
 
 		submissaoRepository.save(sub);
 

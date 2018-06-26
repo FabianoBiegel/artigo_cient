@@ -11,7 +11,7 @@ public class Evento {
     private Long id;
 
     @ManyToOne(optional = true)
-    private Submissao submissao;
+    Submissao submissao;
 
     @Column(nullable = false)
     String usuarioResponsavel;
@@ -31,12 +31,6 @@ public class Evento {
     @Temporal(TemporalType.DATE)
     Date dataFechamento;
 
-//	@Column(nullable = false)
-//	String nomeImagem;
-//	@Transient
-//	private Long aviliacoesPositivas;
-//	@Transient
-//	private Long aviliacoesNegativas;
     public Long getId() {
         return id;
     }
@@ -69,12 +63,6 @@ public class Evento {
         this.submissao = sub;
     }
 
-//	public String getNomeImagem() {
-//		return nomeImagem;
-//	}
-//	public void setNomeImagem(String nomeImagem) {
-//		this.nomeImagem = nomeImagem;
-//	}
     public Submissao getSubmissao() {
         return submissao;
     }

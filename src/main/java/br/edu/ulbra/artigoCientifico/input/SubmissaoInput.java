@@ -1,12 +1,12 @@
 package br.edu.ulbra.artigoCientifico.input;
 
 //import org.springframework.web.multipart.MultipartFile;
+import br.edu.ulbra.artigoCientifico.model.Evento;
 import java.io.File;
 import java.sql.Date;
+import java.util.Set;
 
-public class SubmissaoInput {
-
-    private String evento;
+public class SubmissaoInput {    
 
     private String user;
 
@@ -17,14 +17,8 @@ public class SubmissaoInput {
     private Date dataSubmissao;
 
     private File SubArq;
-
-    public String getEvento() {
-        return evento;
-    }
-
-    public void setEvento(String evento) {
-        this.evento = evento;
-    }
+    
+    private Set<Evento> eventos;    
 
     public String getUser() {
         return user;
@@ -64,6 +58,14 @@ public class SubmissaoInput {
 
     public void setSubArq(File SubArq) {
         this.SubArq = SubArq;
+    }
+
+    public Set<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(Set<Evento> eventos) {
+        this.eventos = eventos;
     }
 
     

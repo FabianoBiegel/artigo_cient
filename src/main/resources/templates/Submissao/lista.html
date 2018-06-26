@@ -42,16 +42,13 @@
 		</div>
 		<div class="ui divider clear"></div>
 		<div class="ui divided items">
-			<div class="item" th:each="sub: ${subs}">
-         <!--  <a class="image" th:href="@{ /admin/vinho/{id}(id=${wine.id}) }">
-					<img th:src="@{ /images/{filename}(filename=${wine.nomeImagem}) }"/>
-				</a>
-	          -->
+			<div class="item" th:each="sub: ${subs}">         
 				<div class="content">
-					<a class="header" th:text="${sub.user}" th:href="@{ /submissoes/{id}(id=${sub.id}) }"></a>
+					<a class="header" th:text="${sub.titulo}" th:href="@{ /submissoes/{id}(id=${sub.id}) }"></a>
 					<div class="meta">
-						<a th:href="@{ /submissoes/{id}(id=${sub.id}) }" th:text="${sub.titulo}"></a>
+						<a th:href="@{ /submissoes/{id}(id=${sub.id}) }" th:text="${sub.Resumo}"></a>
 					</div>
+                                        
 				</div>
 				<div class="content">
 					<a class="ui right floated red labeled icon tiny button" th:href="@{ /submissoes/{id}/delete(id=${sub.id}) }">

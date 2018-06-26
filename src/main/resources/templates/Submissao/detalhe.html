@@ -67,6 +67,16 @@
 							<i class="building icon"></i>
 						</div>
 					</div>
+                                        <div class="field">
+						<div class="ui left labeled right icon input">
+							<div class="ui label">
+								Evento:
+							</div>
+							<select name="eventos" class="ui dropdown fluid">
+								<option th:each="event: ${events}" th:value="${event.id}" th:text="${event.nomeEvento}"></option>
+							</select>
+						</div>
+					</div>
 					<div class="field">
 						<input type="submit" id="cadastrar" class="ui fluid blue button" value="Alterar"/>
 					</div>
