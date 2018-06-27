@@ -79,7 +79,7 @@ public class AdminUserController {
 			return RedirectConstants.REDIRECT_USUARIO_NOVO;
 		}
 
-		Role role = roleRepository.findById(userInput.getIdRole()).get();
+		Role role = roleRepository.findByName("ROLE_USER");
 		User user = mapper.map(userInput, User.class);
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
