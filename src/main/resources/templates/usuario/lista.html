@@ -11,14 +11,17 @@
 </head>
 <body>
 	<div th:include="fragments/menu"></div>
-	<div class="ui container segment">
+	<div class="ui fluid buttons">
+			<a class="ui big yellow button">Usuários</a>
+				</div>	
+		<div class="ui container segment">
 		<div class="ui fluid buttons">
-			<a href="/eventos" class="ui button">Eventos</a>
-			<div class="or" data-text="ou"></div>
-            <a href="/submissoes" class="ui button">Submissões</a>
-			<div class="or" data-text="ou"></div>
-			<a href="/usuarios" class="ui disabled button">Usuários</a>
+			
+            <a href="/submissoes" class="ui blue button">Submissões</a>
+			
+			<a href="/eventos" class="ui green button">Eventos</a>
 		</div>
+	</div>
 	</div>
 	<div class="ui container" th:if="${error}">
 		<div class="ui red message transition"><i class="close icon"></i><span th:text="${error}"/></div>
@@ -29,13 +32,12 @@
 	<div class="ui container segment">
 		<div id="titleContainer" class="ui items">
 			<div class="item">
-				<div class="content">
-					<h1 class="ui header">Usuários</h1>
-				</div>
+				
 				<div class="right floated content">
-					<a href="/usuarios/novo" class="ui right floated medium green labeled icon button">
-						<i class="plus icon"></i>
+					<a href="/usuarios/novo" class="ui right floated medium yellow labeled icon big  button">
 						Adicionar Usuário
+						<i class="plus icon"></i>
+						
 					</a>
 				</div>
 			</div>
@@ -47,7 +49,7 @@
 					<a class="header" th:text="${user.name}" th:href="@{ /usuarios/{id}(id=${user.id}) }"></a>
 				</div>
 				<div class="content">
-					<a class="ui red right floated labeled icon tiny button" th:href="@{ /usuarios/{id}/delete(id=${user.id}) }">
+					<a class="ui red right floated labeled icon big button" th:href="@{ /usuarios/{id}/delete(id=${user.id}) }">
 						Excluir
 						<i class="trash icon"></i>
 					</a>
